@@ -1,0 +1,7 @@
+main:
+  - title: "Posts"
+    url: /
+  - title: "Categories"
+    url: /
+  - title: "About Us"
+    url: https://intermedia.com
