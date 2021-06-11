@@ -20,8 +20,8 @@ Here you will find useful and interesting insights on mobile and fullstack devel
 
 So let's wait no more and dive right into what we've prepared as our first topics: 
 
-- "dealing with iOS 14 local network permission"
-- "resolving WebRTC compatibility issues between multiple dependencies"
+- [Dealing with iOS 14 local network permission]({% post_url 2021-06-11-ios14-local-network %})
+- [Resolving WebRTC compatibility issues between multiple dependencies]({% post_url 2021-06-11-webrtc-buildscript %})
 
 `And one more thing: we are actively hiring, so if you'll become interested in what we are doing please be sure to check our` [open positions][intermedia-careers]
 
