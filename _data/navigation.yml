@@ -2,6 +2,6 @@ main:
   - title: "Posts"
     url: /
   - title: "Categories"
-    url: /
+    url: /categories
   - title: "About Us"
     url: https://intermedia.com
