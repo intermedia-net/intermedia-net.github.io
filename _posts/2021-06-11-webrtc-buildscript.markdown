@@ -5,40 +5,33 @@ date:   2021-06-10 15:09:44 -0700
 categories: Android Mobile
 ---
 
-Unite uses the [PortSIP VoIP SDK][portsip-voip-sdk]
-library to implement SIP. It, as can be seen in
-[`portsipvoipsdk.jar`][portsipvoipsdk-jar],
-copies some of the classes from the WebRTC library, and copies them with
-the original package and original name.
+In this article we continue talking about challenges we are facing during our work on Unite mobile applications. This time we would like to bring up the topic of resolving 3rd party dependencies conflicts when it comes to using the same dependency by multiple application components.
 
-![PortSIP VoIP SDK jar internals][portsip-voip-sdk-jar-internals]
+Our Android app uses a 3rd party proprietary library that drives all our VoIP functionality. Under the hood it uses WebRTC packages.
 
-Researching the possibility of implementing online conferences in the Unite
-application, we needed to use the original WebRTC library. As you may have
-guessed, when using the original WebRTC, it was not even possible
-to compile the project, because we have duplicates in the classpath:
+![VoIP SDK jar internals][voip-sdk-jar-internals]
+
+While integrating another app module that also used WebRTC as its dependency we've faced the following issue at compile time due to duplicates in classpath:
 
 ```
-Duplicate class org.webrtc.BaseBitrateAdjuster found in modules jetified-libwebrtc-runtime.jar (libwebrtc.aar) and jetified-portsipvoipsdk.jar (portsipvoipsdk.jar)
-Duplicate class org.webrtc.BitrateAdjuster found in modules jetified-libwebrtc-runtime.jar (libwebrtc.aar) and jetified-portsipvoipsdk.jar (portsipvoipsdk.jar)
-Duplicate class org.webrtc.CalledByNative found in modules jetified-libwebrtc-runtime.jar (libwebrtc.aar) and jetified-portsipvoipsdk.jar (portsipvoipsdk.jar)
-Duplicate class org.webrtc.Camera1Capturer found in modules jetified-libwebrtc-runtime.jar (libwebrtc.aar) and jetified-portsipvoipsdk.jar (portsipvoipsdk.jar)
-Duplicate class org.webrtc.Camera1Enumerator found in modules jetified-libwebrtc-runtime.jar (libwebrtc.aar) and jetified-portsipvoipsdk.jar (portsipvoipsdk.jar)
-Duplicate class org.webrtc.Camera1Session found in modules jetified-libwebrtc-runtime.jar (libwebrtc.aar) and jetified-portsipvoipsdk.jar (portsipvoipsdk.jar)
-Duplicate class org.webrtc.Camera1Session$1 found in modules jetified-libwebrtc-runtime.jar (libwebrtc.aar) and jetified-portsipvoipsdk.jar (portsipvoipsdk.jar)
-Duplicate class org.webrtc.Camera1Session$2 found in modules jetified-libwebrtc-runtime.jar (libwebrtc.aar) and jetified-portsipvoipsdk.jar (portsipvoipsdk.jar)
-Duplicate class org.webrtc.Camera1Session$SessionState found in modules jetified-libwebrtc-runtime.jar (libwebrtc.aar) and jetified-portsipvoipsdk.jar (portsipvoipsdk.jar)
+Duplicate class org.webrtc.BaseBitrateAdjuster found in modules jetified-libwebrtc-runtime.jar (libwebrtc.aar)
+Duplicate class org.webrtc.BitrateAdjuster found in modules jetified-libwebrtc-runtime.jar (libwebrtc.aar)
+Duplicate class org.webrtc.CalledByNative found in modules jetified-libwebrtc-runtime.jar (libwebrtc.aar)
+Duplicate class org.webrtc.Camera1Capturer found in modules jetified-libwebrtc-runtime.jar (libwebrtc.aar)
+Duplicate class org.webrtc.Camera1Enumerator found in modules jetified-libwebrtc-runtime.jar (libwebrtc.aar)
+Duplicate class org.webrtc.Camera1Session found in modules jetified-libwebrtc-runtime.jar (libwebrtc.aar)
+Duplicate class org.webrtc.Camera1Session$1 found in modules jetified-libwebrtc-runtime.jar (libwebrtc.aar)
+Duplicate class org.webrtc.Camera1Session$2 found in modules jetified-libwebrtc-runtime.jar (libwebrtc.aar)
+Duplicate class org.webrtc.Camera1Session$SessionState found in modules jetified-libwebrtc-runtime.jar (libwebrtc.aar)
 ...
 ```
 
-Then I thought, suppose PortSIP just copied the original WebRTC classes without
-changing in the implementation of its library, then we could remove them
-from [`portsipvoipsdk.jar`][portsipvoipsdk-jar], and they will no longer be
-duplicated. So I did it and the compilation was successful =)
+Our first thought was: most likely our VoIP library just copied the original WebRTC classes, so we could try to remove them
+from its jar file, and resolve build errors. We did it and the compilation was successful =)
 However, the following crashes appeared at runtime:
 
 ```
-java.lang.ClassNotFoundException: Didn't find class "org.webrtc.MediaCodecVideoDecoder" on path: DexPathList[[zip file "/data/app/net.intermedia.mobile_callscape==/base.apk"],nativeLibraryDirectories=[/data/app/net.intermedia.mobile_callscape==/lib/arm64, /data/app/net.intermedia.mobile_callscape==/base.apk!/lib/arm64-v8a, /system/lib64]]
+java.lang.ClassNotFoundException: Didn't find class "org.webrtc.MediaCodecVideoDecoder" on path: DexPathList[[zip file "/data/app/<app_package_name>==/base.apk"],nativeLibraryDirectories=[/data/app/<app_package_name>==/lib/arm64, /data/app/<app_package_name>==/base.apk!/lib/arm64-v8a, /system/lib64]]
      at dalvik.system.BaseDexClassLoader.findClass(BaseDexClassLoader.java:196)
      at java.lang.ClassLoader.loadClass(ClassLoader.java:379)
      at java.lang.ClassLoader.loadClass(ClassLoader.java:312)
@@ -56,12 +49,11 @@ java.lang.ClassNotFoundException: Didn't find class "org.webrtc.MediaCodecVideoD
     #
 ``` 
 
-Another unsuccessful attempt. Obviously, we and PortSIP are using different
-versions of the WebRTC. The ideal solution would be if PortSIP in
-the implementation of their library will completely rename the classes copied
-from WebRTC to something else. For example, the package name would change
-from `org.webrtc` to `com.portsip`. But this way is not possible, since we are
-not writers of [PortSIP VoIP SDK][portsip-voip-sdk].
+Another unsuccessful attempt. Obviously, our app module and VoIP library are using different
+versions of WebRTC. The ideal solution would be if VoIP SDK vendor in
+the implementation of their library will completely rename classes copied
+from WebRTC since they were using them as part of the library sources rather than a depenedency. For example, the package name would change
+from `org.webrtc` to `com.voipsdk`. But this way is not possible, since we don't have access to library sources and waiting for the requested update from the vendor side could take too much time.
 
 Therefore, we will have to rename the package name when adding the original
 WebRTC library from `org.webrtc` to something else, for example, `unite.webrtc`.
@@ -173,7 +165,7 @@ jpkgchanger --current org.webrtc --target unite.webrtc
 ```
 
 
-[portsip-voip-sdk-jar-internals]: {{ site.url }}/assets/webrtc-buildscript/portsip-voip-sdk-jar-internals.png
+[voip-sdk-jar-internals]: {{ site.url }}/assets/webrtc-buildscript/portsip-voip-sdk-jar-internals.png
 [portsip-voip-sdk]: https://www.portsip.com/portsip-voip-sdk/
 [portsipvoipsdk-jar]: https://www.portsip.com/downloads/sdk/AndroidSample.zip
 [webrtc-android-readme]: https://webrtc.github.io/webrtc-org/native-code/android/
