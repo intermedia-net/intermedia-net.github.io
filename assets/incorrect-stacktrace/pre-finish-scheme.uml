@@ -1,0 +1,43 @@
+@startuml
+
+object SourceCode {
+  com.example.service.FcmService.onMessageReceived calls
+  com.example.extensions.ExtensionsB.extensionB(String,Int)
+  --
+  com.example.extensions.ExtensionsA.extensionA(String,Int,Int)
+}
+
+object OptimizedCode {
+  com.example.service.FcmService.onMessageReceived calls
+  com.example.feature.c.a(String,Int)
+  --
+  com.example.feature.c.a(String,Int,Int)
+}
+
+note bottom of OptimizedCode
+    <size:16>""$this$extensionB""</size> contains in the byte code of
+    <size:16>""com.example.feature.c.a(String,Int)""</size>
+end note
+
+object RealStackTrace {
+    ?
+}
+
+object RetracedStackTrace {
+    com.example.service.FcmService.onMessageReceived calls
+    com.example.extensions.ExtentionsA.extensionA
+}
+
+note bottom of RetracedStackTrace
+    Parameter specified as non-null is null:
+    method <size:16>""com.example.feature.c.a""</size>,
+    parameter <size:16>""$this$extensionB""</size>
+end note
+
+SourceCode --> OptimizedCode: R8
+
+OptimizedCode -> RealStackTrace: Crash
+
+RealStackTrace -> RetracedStackTrace: ./retrace
+
+@enduml
