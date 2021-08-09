@@ -6,26 +6,25 @@ categories: random
 ---
 Hi there!
 
-For a long time Intermedia was very well known as a trusted cloud communications provider. We are helping over 122,000 businesses connect better from wherever, whenever. Our teams are working on voice, video conferencing, chat and a lot of other communication and collaboration services that help our customers grow their businesses. We are actively spreading the word about our new services and features through [twitter][intermedia-twitter], [facebook][intermedia-facebook], [linkedin][intermedia-linkedin] and other social media platforms.
+Founded in 1995, Intermedia is a cloud communications company that helps over 122,000 businesses connect better through voice, video conferencing, chat, contact center, business email and productivity, file sharing and backup, security, archiving, and more – all delivered through one highly reliable and secure platform. 
 
-But what about engineering side of our work? Up until this time this was mostly covered in mystery. For years we were learning by our own trials and errors and by absorbing valuable insights from engineering community.
+We are also proud to be the exclusive cloud communications platform provider for NEC, a leader in global market share for unified communications with 80+ million installed business phone users worldwide.
 
-Now we want to start giving back! Our talented engineers from various teams are eager to share their experience with the world!
+But what about the engineering side of our work? We have large development and engineering teams spread around the world working each day to create better and more efficient ways to help companies connect. Like most engineering teams, much of what we have developed through the years has involved a lot of trial and error, as well as learning from colleagues both inside and outside of our organization. You never know what will trigger a better way of doing things and that’s why we have launched this blog – to open a platform with the broader engineering and dev community to share ideas, to challenge, and to grow.
 
-We strongly belive that our stories will help engineers around the world to learn something new, resolve some complicated problem or just have some interesting reading during breaks from coding:)
+Here you will find insights on a wide range of topics, including mobile and full stack development, discussions around the DEV and QA processes, our open-source contributions, and even some amazing and amazingly bad stories from our engineering experience! It’s our intent and hope that this platform will serve to help engineers around the world learn something new, maybe resolve some complicated problem, or just have some interesting reading during breaks from coding:)
 
-**This is our first post in a brand-new Engineering Blog!**
-
-Here you will find useful and interesting insights on mobile and fullstack development, thoughts on DEV and QA processes, our open source contributions and even some biting and humorous stories from our engineering experience!
-
-So let's wait no more and dive right into our first topics: 
+So, let’s get to it and dive right into our first topics:
 
 - [Dealing with iOS 14 local network permission]({% post_url 2021-06-11-ios14-local-network %})
 - [Resolving WebRTC compatibility issues between multiple dependencies]({% post_url 2021-06-11-webrtc-buildscript %})
 
-`And one more thing: we are actively hiring, so if you'll become interested in what we are doing please be sure to check our` [open positions][intermedia-careers]
+`And one more thing: we are actively hiring, so if you find yourself interested to hear more about Intermedia and all that we do, please be sure to check our open positions.`
+
+We invite you to connect with us through [linkedin][intermedia-linkedin], [twitter][intermedia-twitter], [facebook][intermedia-facebook] and visit [www.intermedia.com][intermedia] to stay up to date on new product launches and how we’re continuing to help business work better from wherever.
 
 [intermedia-twitter]: https://twitter.com/intermedia_net
 [intermedia-facebook]: https://www.facebook.com/intermedia.inc
 [intermedia-linkedin]: https://www.linkedin.com/company/intermedia
 [intermedia-careers]: https://www.intermedia.com/about-us/careers
+[intermedia]: https://www.intermedia.com
