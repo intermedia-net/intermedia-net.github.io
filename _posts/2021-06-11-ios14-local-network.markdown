@@ -1,7 +1,7 @@
 ---
 layout: single
 title:  "Dealing with Crashes Caused by iOS 14 Local Network Permission"
-date:   2021-06-17 15:09:44 -0700
+date:   2021-06-18 15:09:44 -0700
 categories: iOS Mobile
 ---
 Hello from the Intermedia Unite Mobile team! Let's start with a short introduction: our team works on Unite mobile applications for iOS and Android. These apps are a key component of Intermedia Unite – Intermedia’s all-in-one voice, video, chat, file sharing and more unified communications as a service (UCaaS) offering.
