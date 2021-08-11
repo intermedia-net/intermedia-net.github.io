@@ -19,7 +19,7 @@ So, let’s get to it and dive right into our first topics:
 - [Dealing with iOS 14 local network permission]({% post_url 2021-06-11-ios14-local-network %})
 - [Resolving WebRTC compatibility issues between multiple dependencies]({% post_url 2021-06-11-webrtc-buildscript %})
 
-`And one more thing: we are actively hiring, so if you find yourself interested to hear more about Intermedia and all that we do, please be sure to check our open positions.`
+`And one more thing: we are actively hiring, so if you find yourself interested to hear more about Intermedia and all that we do, please be sure to check our open positions in` [Russia][intermedia-careers-ru] `and` [worldwide][intermedia-careers]
 
 We invite you to connect with us through [linkedin][intermedia-linkedin], [twitter][intermedia-twitter], [facebook][intermedia-facebook] and visit [www.intermedia.com][intermedia] to stay up to date on new product launches and how we’re continuing to help business work better from wherever.
 
@@ -28,3 +28,4 @@ We invite you to connect with us through [linkedin][intermedia-linkedin], [twitt
 [intermedia-linkedin]: https://www.linkedin.com/company/intermedia
 [intermedia-careers]: https://www.intermedia.com/about-us/careers
 [intermedia]: https://www.intermedia.com
+[intermedia-careers-ru]: https://hh.ru/employer/86298
