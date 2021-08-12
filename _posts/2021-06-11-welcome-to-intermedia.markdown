@@ -1,7 +1,7 @@
 ---
 layout: single
 title:  "Welcome to Intermedia Engineering Blog!"
-date:   2021-06-17 15:09:44 -0700
+date:   2021-07-17 15:09:44 -0700
 categories: random
 ---
 Hi there!
