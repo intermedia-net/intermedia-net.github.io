@@ -51,7 +51,7 @@ java.lang.ClassNotFoundException: Didn't find class "org.webrtc.MediaCodecVideoD
 
 Needless to say, an unsuccessful attempt. Obviously, our app module and VoIP library are using different versions of WebRTC. The ideal solution would be if the VoIP SDK vendor in the implementation of their library would completely rename classes copied from WebRTC since they are using them as part of the library source rather than as a dependency. For example, the package name would change from `org.webrtc` to `com.voipsdk`. But, since we don’t have access to library sources and waiting for the requested update from the vendor side could take too much time, we had to find another way to resolve the issue.
 
-We decided to rename the package name when adding the original WebRTC library from `org.webrtc` to something else, for example, unite.webrtc. Then the absence of conflicts during compilation and in runtime should be guaranteed.
+We decided to rename the package name when adding the original WebRTC library from `org.webrtc` to something else, for example, `unite.webrtc`. Then the absence of conflicts during compilation and in runtime should be guaranteed.
 
 There are two ways to rename the package name of the original WebRTC:
 1. rename the package name in the sources and build a new library
@@ -91,7 +91,7 @@ We had to do this manually but, don’t worry, we will automate later.
 ## Rename `org/webrtc` occurrences
 There is a reference to java files by their relative path, in the configuration
 files and the C source codes. So we had to rename all the substrings of
-`org / webrtc` to `unite / webrtc`:
+`org/webrtc` to `unite/webrtc`:
 
 `BUILD.gn`:
 ```
