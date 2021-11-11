@@ -32,7 +32,7 @@ class FcmService {
     ...
 }
 ```
-`ExtensionsA.kt`:
+`ExtensionsB.kt`:
 ```kotlin
 package com.example.extensions
 
