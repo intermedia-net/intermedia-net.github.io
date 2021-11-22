@@ -62,7 +62,7 @@ We load a special `mapping.txt` file to Crashlytics along with the new release o
 application in order to deobfuscate such stacktraces. `mapping.txt`
 contains a one-to-one matching for names of classes/methods from the source 
 code and names of classes/methods from release binaries. 
-Then Crashlytics run the script [./retrace] [retrace] after 
+Then Crashlytics run the script [./retrace][retrace] after 
 receiving a crash report:
 ```bash
 $ ./retrace mapping.txt stacktrace.txt > result_stacktrace.txt
