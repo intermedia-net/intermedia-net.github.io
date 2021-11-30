@@ -120,7 +120,7 @@ You need to run the plugin after the tests have run (so that the
 ./gradlew test printCoverage
 ```
 
-Plugin source code [available on GitHub][printcoverage]!
+Plugin source code is [available on GitHub][printcoverage]!
 
 [azure-devops-repos]: https://azure.microsoft.com/en-us/services/devops/repos/
 [pull-request-status-api]: https://docs.microsoft.com/en-us/rest/api/azure/devops/git/pull-request-statuses/create?view=azure-devops-rest-6.0
