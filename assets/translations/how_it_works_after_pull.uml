@@ -1,0 +1,23 @@
+@startuml
+
+namespace local {
+    object strings.xml {
+        button_ok
+        button_cancel
+        ..
+        <color:green>button_save</color>
+    }
+
+    object strings_es.xml {
+        button_ok
+        button_cancel
+        ..
+        <color:green>button_save</color>
+    }
+
+    object strings_not_translated.xml {
+        <color:green>button_close</color>
+    }
+}
+
+@enduml
